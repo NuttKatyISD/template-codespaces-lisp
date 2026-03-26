@@ -30,11 +30,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup SBCL
         uses: cheeze2000/setup-sbcl@v1
-      - name: Student Data
+      - name: Data Set 1
         id: test-1
         uses: compscirocks/autograding-io-grader@main
         with:
-          test-name: Student Data
+          test-name: Data Set 1
           command: sbcl --script ${{ env.FILE_NAME }}
           filename: ${{ env.DATA_FILE }}
           input: |-
@@ -47,12 +47,12 @@ jobs:
           loose-squash-spaces: true
           output-format: text
           timeout: 2
-          max-score: 30
-      - name: Judges Data
+          max-score: 25
+      - name: Data Set 2
         id: test-2
         uses: compscirocks/autograding-io-grader@main
         with:
-          test-name: Judges Data
+          test-name: Data Set 2
           command: sbcl --script ${{ env.FILE_NAME }}
           filename: ${{ env.DATA_FILE }}
           input: |-
@@ -65,7 +65,43 @@ jobs:
           loose-squash-spaces: true
           output-format: text
           timeout: 2
-          max-score: 70
+          max-score: 25
+      - name: Data Set 3
+        id: test-3
+        uses: compscirocks/autograding-io-grader@main
+        with:
+          test-name: Data Set 3
+          command: sbcl --script ${{ env.FILE_NAME }}
+          filename: ${{ env.DATA_FILE }}
+          input: |-
+            Some test input
+          expected-output: |-
+            Some expected output
+          comparison-method: loose
+          loose-trim: true
+          loose-ignore-blank-lines: true
+          loose-squash-spaces: true
+          output-format: text
+          timeout: 2
+          max-score: 25
+      - name: Data Set 4
+        id: test-4
+        uses: compscirocks/autograding-io-grader@main
+        with:
+          test-name: Data Set 4
+          command: sbcl --script ${{ env.FILE_NAME }}
+          filename: ${{ env.DATA_FILE }}
+          input: |-
+            Some test input
+          expected-output: |-
+            Some expected output
+          comparison-method: loose
+          loose-trim: true
+          loose-ignore-blank-lines: true
+          loose-squash-spaces: true
+          output-format: text
+          timeout: 2
+          max-score: 25
       
       - name: Autograding Reporter
         id: autograding-reporter
@@ -73,5 +109,7 @@ jobs:
         env:
           TEST-1_RESULTS: "${{steps.test-1.outputs.result}}"
           TEST-2_RESULTS: "${{steps.test-2.outputs.result}}"
+          TEST-3_RESULTS: "${{steps.test-3.outputs.result}}"
+          TEST-4_RESULTS: "${{steps.test-4.outputs.result}}"
         with:
-          runners: test-1,test-2
+          runners: test-1,test-2,test-3,test-4
