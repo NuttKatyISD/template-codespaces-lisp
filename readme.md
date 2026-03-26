@@ -1,4 +1,7 @@
-# Lab Title
+# Lab Title (Lisp)
+
+> [!NOTE]
+> You will need to run your program from the terminal in Codespaces. You can do this by opening the terminal and running `sbcl --script program.lisp` where `program.lisp` is the name of your file.
 
 Instructions go here
 
