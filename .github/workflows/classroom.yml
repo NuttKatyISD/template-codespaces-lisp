@@ -1,0 +1,78 @@
+# Autograding File
+#
+# Do not modify this file. It is used by GitHub Classroom to run autograding tests.
+# Changing it could cause your assignment to be graded incorrectly and may be
+# considered academic dishonesty.
+#
+# If you have questions, please contact your instructor.
+name: Autograding Tests
+env:
+  DATA_FILE: test.dat
+  NO_COLOR: 1
+  FORCE_COLOR: 0
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+  repository_dispatch:
+permissions:
+  checks: write
+  actions: read
+  contents: write
+  issues: write
+  pull-requests: write
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-22.04
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Student Data
+        id: test-1
+        uses: compscirocks/autograding-io-grader@main
+        with:
+          test-name: Student Data
+          setup-command: npm install
+          command: npm run --silent test
+          filename: ${{ env.DATA_FILE }}
+          input: |-
+            Some test input
+          expected-output: |-
+            Some expected output
+          comparison-method: loose
+          loose-trim: true
+          loose-ignore-blank-lines: true
+          loose-squash-spaces: true
+          output-format: text
+          timeout: 2
+          max-score: 30
+      - name: Judges Data
+        id: test-2
+        uses: compscirocks/autograding-io-grader@main
+        with:
+          test-name: Judges Data
+          setup-command: npm install
+          command: npm run --silent test
+          filename: ${{ env.DATA_FILE }}
+          input: |-
+            Some test input
+          expected-output: |-
+            Some expected output
+          comparison-method: loose
+          loose-trim: true
+          loose-ignore-blank-lines: true
+          loose-squash-spaces: true
+          output-format: text
+          timeout: 2
+          max-score: 70
+      
+      - name: Autograding Reporter
+        id: autograding-reporter
+        uses: compscirocks/autograding-grading-reporter@main
+        env:
+          TEST-1_RESULTS: "${{steps.test-1.outputs.result}}"
+          TEST-2_RESULTS: "${{steps.test-2.outputs.result}}"
+        with:
+          runners: test-1,test-2

@@ -1,0 +1,11 @@
+{
+  "name": "template-nodejs",
+  "version": "1.0.0",
+  "description": "Starter template for nodejs output labs;",
+  "main": "script.js",
+  "scripts": {
+    "test": "node script.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
