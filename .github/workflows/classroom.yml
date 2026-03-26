@@ -8,8 +8,7 @@
 name: Autograding Tests
 env:
   DATA_FILE: test.dat
-  NO_COLOR: 1
-  FORCE_COLOR: 0
+  FILE_NAME: program.lisp
 on:
   push:
     branches:
@@ -29,13 +28,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup SBCL
+        uses: cheeze2000/setup-sbcl@v1
       - name: Student Data
         id: test-1
         uses: compscirocks/autograding-io-grader@main
         with:
           test-name: Student Data
-          setup-command: npm install
-          command: npm run --silent test
+          command: sbcl --script ${{ env.FILE_NAME }}
           filename: ${{ env.DATA_FILE }}
           input: |-
             Some test input
@@ -53,8 +53,7 @@ jobs:
         uses: compscirocks/autograding-io-grader@main
         with:
           test-name: Judges Data
-          setup-command: npm install
-          command: npm run --silent test
+          command: sbcl --script ${{ env.FILE_NAME }}
           filename: ${{ env.DATA_FILE }}
           input: |-
             Some test input

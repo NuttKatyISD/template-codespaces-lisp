@@ -1,24 +1,17 @@
 {
-  "name": "Linux Universal",
-  "image": "mcr.microsoft.com/devcontainers/universal:linux",
+  "name": "ls-dev",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
   "features": {
-    
-  },
-  // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "pip3 install --user -r requirements.txt",
-  // Configure tool-specific properties.
+    "ghcr.io/symbolics/devcontainer-features/sbcl:latest": {},
+    "ghcr.io/symbolics/devcontainer-features/quicklisp:latest": {},
+    "ghcr.io/symbolics/devcontainer-features/aclrepl:latest": {},
+    "ghcr.io/symbolics/devcontainer-features/ls-dev:latest": {"blas": "openblas"}
+  }, 
   "customizations": {
     "vscode": {
-      // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
-        "streetsidesoftware.code-spell-checker",
+        "mattn.lisp"
       ]
     }
   }
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
 }
