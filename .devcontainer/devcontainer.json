@@ -1,17 +1,16 @@
 {
-  "name": "ls-dev",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
-  "features": {
-    "ghcr.io/symbolics/devcontainer-features/sbcl:latest": {},
-    "ghcr.io/symbolics/devcontainer-features/quicklisp:latest": {},
-    "ghcr.io/symbolics/devcontainer-features/aclrepl:latest": {},
-    "ghcr.io/symbolics/devcontainer-features/ls-dev:latest": {"blas": "openblas"}
-  }, 
+  "name": "Lisp Dev Container",
+  "image": "ghcr.io/lisp-stat/ls-dev:latest",
   "customizations": {
     "vscode": {
       "extensions": [
-        "mattn.lisp"
+        "mattn.lisp",
+        "tomi.vscode-lisp",
+        "ms-vscode.cpptools",
+        "streetsidesoftware.code-spell-checker",
+        "eamodio.gitlens"
       ]
     }
-  }
+  },
+  "postCreateCommand": "" 
 }
